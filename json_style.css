@@ -1,0 +1,144 @@
+
+* {
+	margin: 0;
+	padding: 0;
+}
+
+body {
+	text-align: center;
+	font-family: 'Roboto', sans-serif;
+	font-size: 10pt;
+
+    background: #010003;
+}
+
+/* Code Tip : https://blog.hubspot.com/website/center-div-css*/
+/*Center in Vertical and Horizontal */
+.center {
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%, -50%);
+}
+
+/* Text Tags */
+a {
+	color: #FFF;
+	text-decoration: none;
+}
+
+b { font-size: 20pt; }
+
+li {
+	color: #FFF;
+	display: inline-block;
+	font-size: 12pt;
+	transition: .2s;
+}
+
+li :hover {
+	color: #FFF;
+	display: inline-block;
+	font-size: 12pt;
+	transition: .2s;
+	text-shadow: 
+		-1px 0 5px #00F, 
+		1px 0  5px #00F, 
+		0 1px  5px #00F, 
+		0 -1px 5px #00F;
+}
+
+p { color: #FFF; }
+
+/* Create Grid */
+.grid-container {
+	display: grid;
+	grid-template-columns: auto;
+}
+
+/* Create Box */
+.linkbox {
+	position: block;
+	text-align: center;
+	height: 140px;
+	width: 140px;
+	margin: 5px;
+	font-size: 12px;
+	float: left;
+	overflow: hidden;
+	background-color: #2525358a;
+	border-style: solid;
+	border-width: 3px;
+	border-color: #FFFFFFaa;
+	box-sizing: border-box;
+
+	border-radius: 10px;
+	background-color: #000A;
+}
+
+/* Color Tags */
+#color0     {border-color: #FFF;}
+#color1     {border-color: #C0C0C0;}
+#color2     {border-color: #808080;}
+#color3     {border-color: #000;}
+#color4     {border-color: #F00;}
+#color5     {border-color: #800000;}
+#color6     {border-color: #FF0;}
+#color7     {border-color: #808000;}
+#color8     {border-color: #0F0;}
+#color9     {border-color: #008000;}
+#color10    {border-color: #0FF;}
+#color11    {border-color: #008080;}
+#color12    {border-color: #00F;}
+#color13    {border-color: #000080;}
+#color14    {border-color: #F0F;}
+#color15    {border-color: #800080;}
+
+/*
+    --Extended Colors--
+#color0 {border-color: #FFF;}
+#color1 {border-color: #A7A7A7;}
+#color2 {border-color: #000;}
+
+#color3 {border-color: #e40303;}
+#color3 {border-color: #ff8c00;}
+#color3 {border-color: #ffed00;}
+#color1 {border-color: #008026;}
+#color2 {border-color: #004dff;}
+#color3 {border-color: #750787;}
+
+#color3 {border-color: #A5A5A5;}
+#color3 {border-color: #84067C;}
+
+#color3 {border-color: #55CDFC;}
+#color3 {border-color: #F7A8B8;}
+
+#color3 {border-color: #FF218C;}
+#color3 {border-color: #FFD800;}
+#color3 {border-color: #21B1FF;}
+
+#color1 {border-color: #0038A8;}
+#color2 {border-color: #9B4F96;}
+#color3 {border-color: #D70270;}
+*/
+
+
+/* latin-ext */
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Roboto'), local('Roboto-Regular'), url(https://fonts.gstatic.com/s/roboto/v18/Fcx7Wwv8OzT71A3E1XOAjvesZW2xOQ-xsNqO47m55DA.woff2) format('woff2');
+  unicode-range: U+0100-024F, U+1E00-1EFF, U+20A0-20AB, U+20AD-20CF, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Roboto'), local('Roboto-Regular'), url(https://fonts.gstatic.com/s/roboto/v18/CWB0XYA8bzo0kSThX0UTuA.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215;
+}
+
+
+
