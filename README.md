@@ -1,5 +1,6 @@
-# Page Host
+# Profile StartPage
 
-[Page Link]
+- Hosted URL [HERE](https://gabrioliv.github.io) with [Github Pages](https://pages.github.com/)
 
-[Page Link]: <https://gabrioliv.github.io/>
+- Main Project of this page and the JSON structure [HERE](https://github.com/GabriOliv/JSONtoPage)
+
