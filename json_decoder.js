@@ -1,4 +1,3 @@
-
 console.log(json_);
 
 function json_to_html(){
@@ -39,4 +38,3 @@ function json_to_html(){
 }
 
 let grid_html = json_to_html();
-
