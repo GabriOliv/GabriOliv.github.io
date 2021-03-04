@@ -43,7 +43,7 @@ function requestUserRepos(){
                         <strong>Repository: </strong>
                     </li>
                     <li class="list-group-item text-lowercase bg-light">
-                        <a class="text-decoration-none text-dark" href="${data[i].html_url}">${data[i].name}</a>
+                        <a class="text-decoration-none" href="${data[i].html_url}">${data[i].name}</a>
                     </li>
                 </ul>
                 <li class="list-group-item bg-light shadow p-2 mb-3 rounded">
