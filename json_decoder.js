@@ -3,7 +3,7 @@ function json_to_html(){
 
     let json = json_;
 
-    let grid_html = "<div class='container col-xs-4 p-1 my-4 bg-secondary'>";
+    let grid_html = "<div class='container col-xs-4 p-1 my-4 bg-secondary rounded'>";
 
     let id = 0;
 
