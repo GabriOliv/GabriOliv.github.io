@@ -19,7 +19,7 @@
 </head>
 
 
-<body class="bg-dark">
+<body class="bg-secondary">
 
 	<!-- Header Menu -->
 	<header>
@@ -56,7 +56,7 @@
 		</div>
 
 		<!-- Head Label -->
-		<div class="navbar navbar-dark bg-dark shadow p-2 mb-3 rounded">
+		<div class="navbar navbar-dark bg-dark shadow p-2 mb-3">
 			<div class="container">
 				<a href="" class="navbar-brand d-flex align-items-center">
 					<strong class="text-light text-decoration-none">
@@ -87,26 +87,19 @@
 
 		<div class="row">
 			<!-- Sidebar Menu-->
-			<nav id="sidebarMenu" class="col-md-4 col-lg-2 bg-secondary collapse shadow rounded">
+			<nav id="sidebarMenu" class="col-md-4 col-lg-2 bg-dark collapse shadow rounded">
 				<div class="container col-xs-4 p-3 my-5 bg-dark">
+					<b class="text-white text-decoration-none">Other Git Status</b>
+
 					<figure class="figure">
-						<img src="https://avatars.githubusercontent.com/u/43646296?s=460&u=9cfa170fc58639db2f1e1a0127f1e0773e6f4653&v=4" class="figure-img img-fluid rounded" alt="Profile Image">
+						<img src="https://github-readme-stats.vercel.app/api?username=gabrioliv&show_icons=false&theme=react&hide=stars,issues&include_all_commits=true" class="figure-img img-fluid rounded" alt="Profile Image">
+						<img src="https://github-readme-stats.vercel.app/api/top-langs/?username=gabrioliv&langs_count=12" class="figure-img img-fluid rounded" alt="Profile Image">
 					</figure>
-		
-					<strong class="text-light text-decoration-none">
-						<h2>Repositories List</h2>
-					</strong>
+					<p><code><a class="text-white" href="https://github.com/anuraghazra/github-readme-stats" target="_blank" >Generated with ReadmeStats</a></code></p>
+
 
 					</br>
-					<p id="userRepos" class="list-group"></p>
-
-					<button
-						type="button"
-						class="btn btn-danger"
-						data-bs-toggle="collapse"
-						data-bs-target="#sidebarMenu">
-						<i class="bi bi-x-square" style="font-size: 1.5rem"></i>
-					</button>
+					<!-- <p id="userRepos" class="list-group"></p> -->
 			
 				</div>
 			</nav>
@@ -114,16 +107,47 @@
 			<!-- Main Content -->
 			<main class="col-md">
 
-				<!-- JSON Link List -->
-				<p id="json_to_html"></p>
-
-				<!-- Profile Status -->
-				<div class="container navbar navbar-dark col-xs-4 p-3 my-5 bg-secondary rounded">
+				<!--Repository List-->
+				<div class="container navbar navbar-dark col-xs-4 p-3 my-5 bg-dark rounded">
 					<div class="container">
 						<a class="navbar-brand d-flex align-items-center">
-							<strong class="text-light text-decoration-none">
-								<h2>Profile Status</h2>
-							</strong>
+							<code class="text-light text-decoration-none"><b>
+								<i class="bi bi-archive"></i>
+								Repositories
+							</b></code>
+									
+						</a>
+
+						<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarRepository" aria-controls="navbarHeader" aria-expanded="true" aria-label="Toggle navigation">
+							<i class="bi bi-list" style="font-size: 2rem"></i>
+						</button>
+					</div>
+
+					<div class="container p-0 my-0 bg-dark">
+						<div class="collapse" id="navbarRepository">
+							<p id="userRepos" class="list-group"></p>
+
+							<button
+								type="button"
+								class="btn btn-danger"
+								data-bs-toggle="collapse"
+								data-bs-target="#navbarRepository">
+								<i class="bi bi-x-square" style="font-size: 1.5rem"></i>
+							</button>
+						</div>
+					</div>
+
+				</div>
+
+
+				<!-- Profile Status -->
+				<div class="container navbar navbar-dark col-xs-4 p-3 my-5 bg-dark rounded">
+					<div class="container">
+						<a class="navbar-brand d-flex align-items-center">
+							<code class="text-light text-decoration-none"><b>
+								<i class="bi bi-graph-up"></i>
+								Profile Status
+							</b></code>
 						</a>
 
 						<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarStatus" aria-controls="navbarHeader" aria-expanded="true" aria-label="Toggle navigation">
@@ -131,10 +155,38 @@
 						</button>
 					</div>
 
-					<div class="collapse rounded" id="navbarStatus">
+					<div class="container bg-dark">
+						<div class="collapse rounded" id="navbarStatus">
 						<img class="img-fluid bg-dark rounded" alt="Profile Image" src="https://metrics.lecoq.io/gabrioliv?template=classic&base.activity=0&base.community=0&base.metadata=0&gists=1&introduction=1&isocalendar=1&languages=1&introduction.title=true&isocalendar.duration=half-year&languages.colors=github&languages.threshold=0%25&config.timezone=America%2FSao_Paulo">
+						<p><code>
+							<a class="text-white" href="https://github.com/lowlighter/metrics" target="_blank" >Generated with MetricsIO</a>
+						</code></p>
+						</div>
 					</div>
-					
+				</div>
+
+
+				<!-- JSON Link List -->
+				<div class="container navbar navbar-dark col-xs-4 p-3 my-5 bg-dark rounded">
+					<div class="container">
+						<a class="navbar-brand d-flex align-items-center">
+							<code class="text-light text-decoration-none"><b>
+								<i class="bi bi-link"></i>
+								Link List
+							</b></code>
+						</a>
+
+						<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarLink" aria-controls="navbarHeader" aria-expanded="true" aria-label="Toggle navigation">
+							<i class="bi bi-list" style="font-size: 2rem"></i>
+						</button>
+					</div>
+
+					<div class="container">
+						<div class="collapse" id="navbarLink">
+							<p id="json_to_html"></p>
+						</div>
+	
+					</div>
 				</div>
 
 			</main>
