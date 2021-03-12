@@ -1,7 +1,3 @@
-/* Code created with this Tutorial: */
-/* https://codesnippet.io/github-api-tutorial/ */
-
-
 
 function requestUserRepos(){
 
@@ -21,39 +17,57 @@ function requestUserRepos(){
             root.removeChild(root.firstChild);
         }
 
-        let ul = document.getElementById('userRepos');
-        let p = document.createElement('p');
+        let p = document.getElementById('userRepos');
         p.innerHTML = (`
-            <strong class="text-light font-monospace fs-5">
-                <i class="bi bi-caret-right-fill"></i>
-                Repositories: ${data.length}
-            </strong></br></br>
+            <code class="text-light font-monospace fs-5">
+                <i class="bi bi-caret-right-fill">${data.length}</i>
+            </code>
         `)
 
-        ul.appendChild(p);
+        console.log(p);
+
+        let counter = 0;
 
         for (let i in data) {
+            counter += 1;
 
-            let li = document.createElement('p');
+            let language = "";
 
-            li.innerHTML = (`
-                <ul class="list-group list-group-horizontal bg-secondary">
-                    <li class="list-group-item text-light bg-dark">
-                        <i class="bi bi-check-square-fill"></i>
-                        <strong>Repository: </strong>
-                    </li>
-                    <li class="list-group-item text-lowercase bg-light">
-                        <a class="text-decoration-none" href="${data[i].html_url}">${data[i].name}</a>
-                    </li>
-                </ul>
-                <li class="list-group-item bg-light shadow p-2 mb-3 rounded">
-                    <strong>Description:</strong>
-                    <p>${data[i].description}</p>
-                    <p>Language: ${data[i].language}</p>
-                </li>
+            data[i].language ? (language = `<p>Language: ${data[i].language}</p>`) : (language = "");
+
+            let nav = document.createElement("nav");
+
+            nav.classList.add("navbar", "navbar-dark", "text-start", "bg-dark")
+
+            nav.innerHTML = (`
+                <div class="container">
+                    <button class="btn btn-dark" type="button" data-bs-toggle="collapse" data-bs-target="#navbarRepo${counter}" aria-controls="navbarHeader" aria-expanded="true" aria-label="Toggle navigation">
+                        <i class="bi bi-list fs-5">
+                            <code class="navbar-brand">${data[i].name}</code>
+                        </i>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarRepo${counter}">
+                        <ul class="navbar-nav">
+                            <p></p>
+                            <li class="nav-item">
+                                <p><a class="text-info" href="${data[i].html_url}" target="_blank">Source Link</a></p>
+                            </li>
+                            <li class="nav-item text-light">
+                                <p><b>Fork: </b><span>${data[i].fork ? "Yes" : "No"}</span></p>
+                            </li>
+                            <li class="nav-item text-light">
+                                <p><b>Description:</b></p>
+                                <p>${language}</p>
+                                <p>${data[i].description}</p>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
             `);
 
-            ul.appendChild(li);
+            console.log(nav);
+
+            p.appendChild(nav);
         }
     }
 
