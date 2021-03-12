@@ -3,7 +3,7 @@ function json_to_html(){
 
     let json = json_;
 
-    let grid_html = "<div class='container col-xs-4 p-1 my-4 bg-secondary rounded'>";
+    let grid_html = "";
 
     let id = 0;
 
@@ -36,11 +36,11 @@ function json_to_html(){
 
 
             grid_html += "<div class='col-sm-" + json[1][2][id] + "'>";
-            grid_html += "<nav class='navbar navbar-" + color_string_letter + " text-left bg-" + color_string_bg + "'>";
+            grid_html += "<nav class='navbar navbar-light text-left bg-" + color_string_bg + "'>";
 
             grid_html += "<div class='container-fluid'>";
 
-            grid_html += "<div class='container-fluid " + color_string_bg + "' type='button' data-bs-toggle='collapse' data-bs-target='#navbar" + id + "'>";
+            grid_html += "<div class='container-fluid' type='button' data-bs-toggle='collapse' data-bs-target='#navbar" + id + "'>";
 
             grid_html += "<a class='navbar-brand' href='#'>" + json[1][1][id] + "</a></div>";
 
@@ -66,7 +66,7 @@ function json_to_html(){
 
     }
 
-    grid_html += "</div>";
+    grid_html += "";
 
 	return grid_html;
 
