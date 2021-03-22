@@ -8,9 +8,3 @@
 ### Modules:
 - Sidebar
   - Status Image - Generated with [ReadmeStats](https://github.com/anuraghazra/github-readme-stats)
-- Repository List
-  - Generated with [Github API](https://docs.github.com/en/rest)
-- Profile Status
-  - Status Image - Generated with [Metrics](https://github.com/lowlighter/metrics)
-- Link List
-  - Generated with JSON
