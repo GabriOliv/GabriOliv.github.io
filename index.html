@@ -15,17 +15,10 @@
 		tailwind.config = {
 			theme: {
 				extend: {
-					keyframes: {
-						wiggle: {
-							'0%, 100%': { transform: 'rotate(-3deg)' },
-							'50%': { transform: 'rotate(3deg)' },
-						}
-					},
-					colors: {
-						clifford: '#da373d',
-					},
-					animation: {
-						wiggle: 'wiggle 3s ease-in-out infinite',
+					listStyleImage: {
+						spin: 'url("img/spinner.svg")',
+						pass: 'url("img/checked_pass.svg")',
+						fail: 'url("img/checked_fail.svg")',
 					}
 				}
 			}
@@ -44,6 +37,15 @@
 				<p class="px-5 text-xs sm:text-base dark:text-gray-400">Computer Scientist</p>
 			</div>
 
+			<div class="my-2 pt-4 text-left">
+				<ul class="list-inside list-image-none">
+					<li id="item_0" class="text-sm text-gray-400 bg_spin">RoadMap:</li>
+					<li id="item_1" class="text-sm text-gray-400 bg_spin invisible">Computer Science</li>
+					<li id="item_2" class="text-sm text-gray-400 bg_spin invisible">Software Testing</li>
+					<li id="item_3" class="text-sm text-gray-400 bg_spin invisible">Quality Assurance</li>
+				</ul>
+			</div>
+
 			<div class="flex justify-center pt-2 space-x-4 align-center">
 				<a rel="noopener noreferrer" href="https://github.com/gabrioliv" aria-label="GitHub" class="p-2 rounded-md hover:duration-300 hover:dark:text-blue-500">
 					<i class="bi bi-github text-3xl"></i>
@@ -59,5 +61,45 @@
 		</div>
 	</div>
 </body>
+
+<style>
+li.bg_spin {
+	background: url("img/spinner.svg") left center no-repeat;
+	padding-left: 25px;
+}
+
+li.bg_pass {
+	background: url("img/checked_pass.svg") left center no-repeat;
+	padding-left: 25px;
+}
+</style>
+
+<script>
+	function sleep(ms) {
+		return new Promise(resolve => setTimeout(resolve, ms));
+	}
+
+	async function listAnimation() {
+		const prefix = "item_";
+		await sleep(2000);
+
+		for (let i = 1; i <= 3; i++) {
+			let element = document.getElementById(prefix + i);
+
+			element.classList.remove("invisible");
+			await sleep(2000);
+
+			element.classList.replace("bg_spin", "bg_pass");
+			await sleep(500);
+		}
+
+		let element = document.getElementById(prefix + "0");
+		element.classList.replace("bg_spin", "bg_pass");
+
+		console.log('Done');
+	}
+
+	listAnimation();
+</script>
 
 </html>
