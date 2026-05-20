@@ -1,0 +1,72 @@
+{
+	"projects": [
+		{
+			"name": "chaos",
+			"url": "https://github.com/GabriOliv/chaos",
+			"description": "Crystal shard to add chaos to your code",
+			"language": "Crystal"
+		},
+		{
+			"name": "asciigraph",
+			"url": "https://gabrioliv.github.io/asciigraph/",
+			"description": "Generate ASCII graphs in txt or SVG from number sequences",
+			"language": "JavaScript"
+		},
+		{
+			"name": "garden",
+			"url": "https://gabrioliv.github.io/garden/",
+			"description": "Uma Colecao de Notas em Evolucao - Digital garden on Quality Assurance",
+			"language": "TypeScript"
+		},
+		{
+			"name": "comparador-de-listas",
+			"url": "https://gabrioliv.github.io/comparador-de-listas",
+			"description": "Tool to compare two lists using set theory operations",
+			"language": "HTML"
+		},
+		{
+			"name": "gherkin-to-html",
+			"url": "https://GabriOliv.github.io/gherkin-to-html/",
+			"description": "Generator of HTML with Gherkin syntax highlighted for BDD docs",
+			"language": "HTML"
+		},
+		{
+			"name": "docker-clikit",
+			"url": "https://github.com/GabriOliv/docker-clikit",
+			"description": "Kit with CLI Apps for Docker",
+			"language": "Dockerfile"
+		}
+	],
+	"gists": [
+		{
+			"name": "starship.toml",
+			"url": "https://gist.github.com/GabriOliv/9a84424377f5d0c54c96c621b9596bfb",
+			"description": "Starship Prompt config file",
+			"language": "TOML"
+		},
+		{
+			"name": "sorting_algorithm_mathematical_analysis",
+			"url": "https://gist.github.com/GabriOliv/be9dcdc7b8915ab0698f63b34607468d",
+			"description": "Sorting Algorithm - Mathematical Analysis",
+			"language": "Markdown"
+		},
+		{
+			"name": "pre-push",
+			"url": "https://gist.github.com/GabriOliv/22b9d76b5633ce726d13a364e31a8958",
+			"description": "Pre-Push Git Hook for Pushing Commits to Multiple Remotes",
+			"language": "Shell"
+		},
+		{
+			"name": "script_clone.py",
+			"url": "https://gist.github.com/GabriOliv/287a3166a0ca5ad92b4199ddce611adc",
+			"description": "Python + GitHub API - Clone all public Repos and Gists",
+			"language": "Python"
+		},
+		{
+			"name": "syscall_table_x86",
+			"url": "https://gist.github.com/GabriOliv/a9411fa771a1e5d94105cb05cbaebd21",
+			"description": "Syscall Table x86 Linux for Assembly Programming",
+			"language": "Markdown"
+		}
+	]
+}

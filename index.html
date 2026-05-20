@@ -1,105 +1,283 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 	<!-- Metadata -->
 	<title>Gabriel O. Laureano</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="Gabriel O. Laureano - Computer Scientist, Software Tester, Quality Assurance Engineer.">
+	<link rel="icon" href="https://avatars.githubusercontent.com/u/43646296" type="image/png">
 
 	<!-- Bootstrap Icons -->
-	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css" integrity="sha384-CK2SzKma4jA5H/MXDUU7i1TqZlCFaD4T01vtyDFvPlD97JQyS+IsSh1nI2EFbpyk" crossorigin="anonymous">
 
 	<!-- Tailwind CSS -->
-	<script src="https://cdn.tailwindcss.com"></script>
-	<script>
-		tailwind.config = {
-			theme: {
-				extend: {
-					listStyleImage: {
-						spin: 'url("img/spinner.svg")',
-						pass: 'url("img/checked_pass.svg")',
-						fail: 'url("img/checked_fail.svg")',
-					}
-				}
-			}
+	<script src="https://cdn.tailwindcss.com/3.4.17"></script>
+
+	<style>
+		/* Scroll reveal */
+		.reveal-card, .reveal-item {
+			opacity: 0;
+			transform: translateY(20px);
+			transition:
+				opacity 0.65s cubic-bezier(0.16, 1, 0.3, 1),
+				transform 0.65s cubic-bezier(0.16, 1, 0.3, 1),
+				box-shadow 0.3s ease,
+				border-color 0.3s ease;
+			will-change: opacity, transform;
 		}
-	</script>
+		.reveal-card.visible, .reveal-item.visible {
+			opacity: 1;
+			transform: translateY(0);
+		}
+
+		/* Card glow on hover */
+		.card-glow:hover {
+			box-shadow: 0 0 24px rgba(124, 58, 237, 0.12);
+		}
+
+		/* Typing cursor */
+		#typing-text::after {
+			content: '\25ae';
+			animation: blink 1s step-end infinite;
+			color: #8b5cf6;
+			margin-left: 2px;
+		}
+		@keyframes blink { 50% { opacity: 0; } }
+
+		/* Terminal font */
+		.terminal { font-family: 'Courier New', Courier, monospace; }
+	</style>
 </head>
 
-<body class="bg-black grid h-screen place-items-center">
-	<div class="shadow-inner shadow-black flex flex-col justify-center max-w-xs p-6 rounded-lg sm:px-12 bg-gray-900 text-gray-300">
-		<div class="space-y-4 text-center divide-y divide-gray-700">
+<body class="bg-black text-gray-300">
 
-			<img src="https://avatars.githubusercontent.com/u/43646296" alt="Profile image" class="w-32 h-32 mx-auto rounded-full bg-gray-500 aspect-square">
+	<!-- Scroll progress bar -->
+	<div id="progress-bar" class="fixed top-0 left-0 h-0.5 w-0 bg-gradient-to-r from-violet-700 to-blue-500 z-50 transition-[width] duration-[80ms] ease-linear"></div>
 
-			<div class="my-2 pt-2 space-x-4">
-				<h2 class="text-xl font-semibold sm:text-1.5xl">Gabriel O. Laureano</h2>
-				<p class="px-5 text-xs sm:text-base text-gray-400">Computer Scientist</p>
+	<!-- Hero Section -->
+	<section class="bg-[radial-gradient(circle,rgba(255,255,255,0.04)_1px,transparent_1px)] bg-[length:22px_22px] min-h-screen flex flex-col items-center justify-center px-4 py-12 gap-6">
+
+		<!-- Combined Profile + Terminal Card -->
+		<div class="shadow-inner shadow-black flex flex-col max-w-sm w-full rounded-lg bg-gray-900 text-gray-300 border border-gray-800 overflow-hidden">
+
+			<!-- Profile -->
+			<div class="flex flex-col items-center text-center gap-4 px-8 pt-8 pb-6">
+				<img src="https://avatars.githubusercontent.com/u/43646296" alt="Profile"
+					class="w-28 h-28 rounded-full bg-gray-500 aspect-square">
+				<div>
+					<h2 class="text-xl font-semibold">Gabriel O. Laureano</h2>
+					<p class="mt-1 text-xs sm:text-sm text-gray-400" id="typing-text"></p>
+				</div>
+				<div class="flex gap-3">
+					<a rel="noopener noreferrer" href="https://github.com/gabrioliv" target="_blank" aria-label="GitHub"
+					   class="p-2 rounded-md transition-colors hover:text-violet-400">
+						<i class="bi bi-github text-3xl"></i>
+					</a>
+					<a rel="noopener noreferrer" href="https://www.linkedin.com/in/gabriel-o-77569a208/" target="_blank" aria-label="LinkedIn"
+					   class="p-2 rounded-md transition-colors hover:text-violet-400">
+						<i class="bi bi-linkedin text-3xl"></i>
+					</a>
+					<a rel="noopener noreferrer" href="https://t.me/Gab_Laureano" target="_blank" aria-label="Telegram"
+					   class="p-2 rounded-md transition-colors hover:text-violet-400">
+						<i class="bi bi-telegram text-3xl"></i>
+					</a>
+				</div>
 			</div>
 
-			<div class="my-2 pt-4 text-left">
-				<ul class="list-inside list-image-none">
-					<li id="item_0" class="text-sm text-gray-400 bg_spin">RoadMap:</li>
-					<li id="item_1" class="text-sm text-gray-400 bg_spin invisible">Computer Science</li>
-					<li id="item_2" class="text-sm text-gray-400 bg_spin invisible">Software Testing</li>
-					<li id="item_3" class="text-sm text-gray-400 bg_spin invisible">Quality Assurance</li>
-				</ul>
-			</div>
-
-			<div class="flex justify-center pt-2 space-x-4 align-center">
-				<a rel="noopener noreferrer" href="https://github.com/gabrioliv" aria-label="GitHub" class="p-2 rounded-md hover:duration-300 hover:text-blue-500">
-					<i class="bi bi-github text-3xl"></i>
-				</a>
-				<a rel="noopener noreferrer color" href="https://www.linkedin.com/in/gabriel-o-77569a208/" aria-label="Linkedin" class="p-2 rounded-md hover:duration-300 hover:text-blue-500">
-					<i class="bi bi-linkedin text-3xl"></i>
-				</a>
-				<a rel="noopener noreferrer" href="https://t.me/Gab_Laureano" aria-label="Telegram" class="p-2 rounded-md hover:duration-300 hover:text-blue-500">
-					<i class="bi bi-telegram text-3xl"></i>
-				</a>
+			<!-- Terminal -->
+			<div class="terminal border-t border-gray-800 bg-gray-950 px-6 py-4 text-xs">
+				<div class="flex items-center justify-between mb-3">
+					<span class="text-gray-500">~ test suite</span>
+					<div class="flex gap-1.5">
+						<span class="w-2 h-2 rounded-full bg-red-900 opacity-70"></span>
+						<span class="w-2 h-2 rounded-full bg-yellow-900 opacity-70"></span>
+						<span class="w-2 h-2 rounded-full bg-emerald-800 opacity-70"></span>
+					</div>
+				</div>
+				<div id="term-line-1" class="invisible flex justify-between py-0.5">
+					<span class="text-emerald-500"><i class="bi bi-check-lg"></i> computer_science</span>
+					<span id="term-badge-1" class="text-emerald-500 font-bold">&#10003;</span>
+				</div>
+				<div id="term-line-2" class="invisible flex justify-between py-0.5">
+					<span class="text-emerald-500"><i class="bi bi-check-lg"></i> software_testing</span>
+					<span id="term-badge-2" class="text-emerald-500 font-bold">&#10003;</span>
+				</div>
+				<div id="term-line-3" class="invisible flex justify-between py-0.5">
+					<span class="text-emerald-500"><i class="bi bi-check-lg"></i> quality_assurance</span>
+					<span id="term-badge-3" class="text-emerald-500 font-bold">&#10003;</span>
+				</div>
+				<div id="term-summary" class="invisible mt-2 pt-2 border-t border-gray-800 flex justify-between">
+					<span class="text-emerald-500">3 passed</span>
+					<span class="text-gray-700">0 failed</span>
+				</div>
 			</div>
 
 		</div>
-	</div>
-</body>
 
-<style>
-li.bg_spin {
-	background: url("img/spinner.svg") left center no-repeat;
-	padding-left: 25px;
-}
+		<!-- Scroll indicator -->
+		<div class="animate-bounce text-gray-700">
+			<i class="bi bi-chevron-double-down text-2xl"></i>
+		</div>
+	</section>
 
-li.bg_pass {
-	background: url("img/checked_pass.svg") left center no-repeat;
-	padding-left: 25px;
-}
-</style>
+	<div class="h-px max-w-3xl mx-auto bg-[linear-gradient(90deg,transparent,rgba(124,58,237,0.25),transparent)]"></div>
 
-<script>
-	function sleep(ms) {
-		return new Promise(resolve => setTimeout(resolve, ms));
-	}
+	<!-- Projects Section -->
+	<section class="max-w-3xl mx-auto px-4 py-16">
+		<h3 class="border-l-2 border-violet-500 pl-3 text-sm font-semibold text-gray-400 mb-8 tracking-widest uppercase">Projects</h3>
+		<div class="grid grid-cols-1 sm:grid-cols-2 gap-4" id="projects-grid"></div>
+	</section>
 
-	async function listAnimation() {
-		const prefix = "item_";
-		await sleep(2000);
+	<div class="h-px max-w-3xl mx-auto bg-[linear-gradient(90deg,transparent,rgba(124,58,237,0.25),transparent)]"></div>
 
-		for (let i = 1; i <= 3; i++) {
-			let element = document.getElementById(prefix + i);
+	<!-- Gists Section -->
+	<section class="max-w-3xl mx-auto px-4 py-16">
+		<h3 class="border-l-2 border-violet-500 pl-3 text-sm font-semibold text-gray-400 mb-8 tracking-widest uppercase">Gists</h3>
+		<div class="flex flex-col gap-3" id="gists-list"></div>
+	</section>
 
-			element.classList.remove("invisible");
-			await sleep(2000);
+	<!-- Footer -->
+	<footer class="text-center text-xs text-gray-700 py-8">
+		<a href="https://github.com/GabriOliv" target="_blank" rel="noopener noreferrer"
+		   class="hover:text-violet-500 transition-colors">
+			GabriOliv @ GitHub
+		</a>
+	</footer>
 
-			element.classList.replace("bg_spin", "bg_pass");
-			await sleep(500);
+	<script>
+		// === Scroll progress bar ===
+		const progressBar = document.getElementById('progress-bar');
+		window.addEventListener('scroll', () => {
+			const scrolled = document.documentElement.scrollTop;
+			const total = document.documentElement.scrollHeight - window.innerHeight;
+			if (total > 0) progressBar.style.width = (scrolled / total * 100) + '%';
+		});
+
+		// === Typing subtitle ===
+		function typingEffect(el, words, pause) {
+			let wi = 0, ci = 0, deleting = false;
+			function tick() {
+				const word = words[wi];
+				if (deleting) {
+					el.textContent = word.slice(0, --ci);
+					if (ci === 0) { deleting = false; wi = (wi + 1) % words.length; }
+				} else {
+					el.textContent = word.slice(0, ++ci);
+					if (ci === word.length) { deleting = true; setTimeout(tick, pause); return; }
+				}
+				setTimeout(tick, deleting ? 55 : 95);
+			}
+			tick();
 		}
 
-		let element = document.getElementById(prefix + "0");
-		element.classList.replace("bg_spin", "bg_pass");
+		// === Sleep helper ===
+		function sleep(ms) { return new Promise(r => setTimeout(r, ms)); }
 
-		console.log('Done');
-	}
+		// === Braille spinner then [PASS] ===
+		const brailleFrames = ['⠋','⠙','⠹','⠸','⠼','⠴','⠦','⠧','⠇','⠏'];
+		async function spinBadge(id) {
+			const el = document.getElementById(id);
+			for (let i = 0; i < brailleFrames.length * 2; i++) {
+				el.textContent = brailleFrames[i % brailleFrames.length];
+				await sleep(75);
+			}
+			el.textContent = '[PASS]';
+		}
 
-	listAnimation();
-</script>
+		// === Terminal animation ===
+		async function terminalAnimation() {
+			const lines = ['term-line-1', 'term-line-2', 'term-line-3'];
+			await sleep(800);
+			for (let i = 0; i < lines.length; i++) {
+				document.getElementById(lines[i]).classList.remove('invisible');
+				await spinBadge('term-badge-' + (i + 1));
+				await sleep(150);
+			}
+			await sleep(300);
+			document.getElementById('term-summary').classList.remove('invisible');
+		}
 
+		// === Language badge colors ===
+		const langColors = {
+			python:     'text-blue-400 bg-blue-950',
+			typescript: 'text-sky-300 bg-sky-950',
+			javascript: 'text-yellow-400 bg-yellow-950',
+			crystal:    'text-purple-400 bg-purple-950',
+			html:       'text-orange-400 bg-orange-950',
+			shell:      'text-green-400 bg-green-950',
+			dockerfile: 'text-cyan-400 bg-cyan-950',
+			toml:       'text-orange-300 bg-orange-950',
+			markdown:   'text-gray-400 bg-gray-800',
+		};
+		function langBadge(lang, extra) {
+			const cls = langColors[lang.toLowerCase()] || 'text-gray-400 bg-gray-800';
+			const ex = extra ? ' ' + extra : '';
+			return '<span class="text-xs px-2 py-0.5 rounded ' + cls + ex + '">' + lang + '</span>';
+		}
+
+		// === Intersection observer ===
+		const observer = new IntersectionObserver((entries) => {
+			entries.forEach(entry => {
+				if (entry.isIntersecting) {
+					const siblings = Array.from(entry.target.parentElement.children);
+					const i = siblings.indexOf(entry.target);
+					setTimeout(() => entry.target.classList.add('visible'), i * 80);
+					observer.unobserve(entry.target);
+				}
+			});
+		}, { threshold: 0.1 });
+
+		// === Render projects ===
+		function renderProjects(projects) {
+			const grid = document.getElementById('projects-grid');
+			grid.innerHTML = projects.map(p => {
+				const badge = p.stars
+					? '<span class="text-xs text-yellow-400 flex items-center gap-1"><i class="bi bi-star-fill"></i> ' + p.stars + '</span>'
+					: '<i class="bi bi-box-arrow-up-right text-xs text-gray-600"></i>';
+				return '<a href="' + p.url + '" target="_blank" rel="noopener noreferrer" class="reveal-card card-glow group bg-gray-900 rounded-lg p-5 border border-gray-800 hover:border-violet-700">'
+					+ '<div class="flex items-start justify-between mb-2">'
+					+ '<span class="text-sm font-semibold text-gray-200 group-hover:text-violet-400 transition-colors">' + p.name + '</span>'
+					+ badge + '</div>'
+					+ '<p class="text-xs text-gray-500 mb-3">' + p.description + '</p>'
+					+ langBadge(p.language)
+					+ '</a>';
+			}).join('');
+			grid.querySelectorAll('.reveal-card').forEach(el => observer.observe(el));
+		}
+
+		// === Render gists ===
+		function renderGists(gists) {
+			const list = document.getElementById('gists-list');
+			list.innerHTML = gists.map(g => {
+				const badge = g.stars
+					? '<span class="text-xs text-yellow-400 flex items-center gap-1 shrink-0"><i class="bi bi-star-fill"></i> ' + g.stars + '</span>'
+					: langBadge(g.language, 'shrink-0');
+				return '<a href="' + g.url + '" target="_blank" rel="noopener noreferrer" class="reveal-item card-glow group flex items-center justify-between bg-gray-900 rounded-lg px-4 py-3 border border-gray-800 hover:border-violet-700">'
+					+ '<div class="min-w-0 mr-4">'
+					+ '<span class="text-sm text-gray-200 group-hover:text-violet-400 transition-colors">' + g.name + '</span>'
+					+ '<p class="text-xs text-gray-500 truncate">' + g.description + '</p>'
+					+ '</div>' + badge + '</a>';
+			}).join('');
+			list.querySelectorAll('.reveal-item').forEach(el => observer.observe(el));
+		}
+
+		// === Data fetch ===
+		fetch('data.json')
+			.then(r => r.json())
+			.then(data => {
+				renderProjects(data.projects);
+				renderGists(data.gists);
+			});
+
+		// === Init ===
+		terminalAnimation();
+		typingEffect(
+			document.getElementById('typing-text'),
+			['Computer Scientist', 'Software Tester', 'QA Engineer', 'Test Strategist'],
+			2400
+		);
+	</script>
+
+</body>
 </html>
