@@ -33,7 +33,7 @@
 
 		/* Card glow on hover */
 		.card-glow:hover {
-			box-shadow: 0 0 24px rgba(124, 58, 237, 0.12);
+			box-shadow: 0 0 28px rgba(59, 130, 246, 0.14), 0 0 18px rgba(124, 58, 237, 0.1);
 		}
 
 		/* Typing cursor */
@@ -47,70 +47,212 @@
 
 		/* Terminal font */
 		.terminal { font-family: 'Courier New', Courier, monospace; }
+
+		/* Terminal surface details */
+		.terminal-shell {
+			position: relative;
+			overflow: hidden;
+		}
+		.terminal-shell::before {
+			content: '';
+			position: absolute;
+			inset: 0;
+			pointer-events: none;
+			background:
+				linear-gradient(rgba(255,255,255,0.025) 50%, rgba(0,0,0,0.18) 50%),
+				radial-gradient(circle at 12% 18%, rgba(59,130,246,0.16), transparent 28%),
+				radial-gradient(circle at 84% 8%, rgba(124,58,237,0.16), transparent 24%);
+			background-size: 100% 4px, 100% 100%, 100% 100%;
+			mix-blend-mode: screen;
+			opacity: 0.42;
+		}
+		.terminal-shell > * { position: relative; }
+
+		.command-panel {
+			backdrop-filter: blur(14px);
+		}
+
+		.stack-section {
+			opacity: 0;
+			transition: opacity 0.4s ease;
+		}
+		.stack-section.visible {
+			opacity: 1;
+		}
+
+		@media (prefers-reduced-motion: no-preference) {
+			.project-card {
+				transition:
+					transform 0.25s ease,
+					box-shadow 0.25s ease,
+					border-color 0.25s ease,
+					background 0.25s ease;
+			}
+			.project-card:hover {
+				transform: translateY(-3px);
+			}
+			.command-link:hover {
+				transform: translateY(-1px);
+			}
+		}
 	</style>
 </head>
 
-<body class="bg-black text-gray-300">
+<body class="bg-black text-gray-300 selection:bg-violet-500 selection:text-white">
 
 	<!-- Scroll progress bar -->
-	<div id="progress-bar" class="fixed top-0 left-0 h-0.5 w-0 bg-gradient-to-r from-violet-700 to-blue-500 z-50 transition-[width] duration-[80ms] ease-linear"></div>
+	<div id="progress-bar" class="fixed top-0 left-0 h-0.5 w-0 bg-gradient-to-r from-blue-500 via-violet-500 to-cyan-400 z-50 transition-[width] duration-[80ms] ease-linear"></div>
+
+	<!-- Command palette -->
+	<nav class="fixed bottom-3 left-1/2 z-40 w-[calc(100%-1.5rem)] max-w-md -translate-x-1/2 sm:top-4 sm:bottom-auto sm:w-auto" aria-label="Quick navigation">
+		<div class="command-panel terminal flex items-center justify-between gap-1 rounded-lg border border-gray-800 bg-gray-950/[0.82] p-1 text-[11px] shadow-2xl shadow-blue-950/20">
+			<a href="#home" class="command-link flex min-h-10 flex-1 items-center justify-center gap-1.5 rounded-md px-2 text-gray-400 transition hover:bg-blue-950/50 hover:text-cyan-300 sm:flex-none">
+				<i class="bi bi-terminal"></i><span>home</span>
+			</a>
+			<a href="#certifications" class="command-link flex min-h-10 flex-1 items-center justify-center gap-1.5 rounded-md px-2 text-gray-400 transition hover:bg-cyan-950/50 hover:text-cyan-300 sm:flex-none">
+				<i class="bi bi-patch-check"></i><span>certs</span>
+			</a>
+			<a href="#projects" class="command-link flex min-h-10 flex-1 items-center justify-center gap-1.5 rounded-md px-2 text-gray-400 transition hover:bg-violet-950/60 hover:text-violet-300 sm:flex-none">
+				<i class="bi bi-kanban"></i><span>projects</span>
+			</a>
+			<a href="#gists" class="command-link flex min-h-10 flex-1 items-center justify-center gap-1.5 rounded-md px-2 text-gray-400 transition hover:bg-blue-950/50 hover:text-blue-300 sm:flex-none">
+				<i class="bi bi-braces"></i><span>gists</span>
+			</a>
+		</div>
+	</nav>
 
 	<!-- Hero Section -->
-	<section class="bg-[radial-gradient(circle,rgba(255,255,255,0.04)_1px,transparent_1px)] bg-[length:22px_22px] min-h-screen flex flex-col items-center justify-center px-4 py-12 gap-6">
+	<section id="home" class="bg-[radial-gradient(circle,rgba(255,255,255,0.045)_1px,transparent_1px)] bg-[length:22px_22px] min-h-screen flex flex-col items-center justify-center px-4 py-16 gap-6">
 
 		<!-- Combined Profile + Terminal Card -->
-		<div class="shadow-inner shadow-black flex flex-col max-w-sm w-full rounded-lg bg-gray-900 text-gray-300 border border-gray-800 overflow-hidden">
+		<div class="terminal-shell shadow-inner shadow-black flex flex-col max-w-4xl w-full rounded-lg bg-gray-900 text-gray-300 border border-gray-800">
 
-			<!-- Profile -->
-			<div class="flex flex-col items-center text-center gap-4 px-8 pt-8 pb-6">
-				<img src="https://avatars.githubusercontent.com/u/43646296" alt="Profile"
-					class="w-28 h-28 rounded-full bg-gray-500 aspect-square">
-				<div>
-					<h2 class="text-xl font-semibold">Gabriel O. Laureano</h2>
-					<p class="mt-1 text-xs sm:text-sm text-gray-400" id="typing-text"></p>
-				</div>
-				<div class="flex gap-3">
-					<a rel="noopener noreferrer" href="https://github.com/gabrioliv" target="_blank" aria-label="GitHub"
-					   class="p-2 rounded-md transition-colors hover:text-violet-400">
-						<i class="bi bi-github text-3xl"></i>
-					</a>
-					<a rel="noopener noreferrer" href="https://www.linkedin.com/in/gabriel-o-77569a208/" target="_blank" aria-label="LinkedIn"
-					   class="p-2 rounded-md transition-colors hover:text-violet-400">
-						<i class="bi bi-linkedin text-3xl"></i>
-					</a>
-					<a rel="noopener noreferrer" href="https://t.me/Gab_Laureano" target="_blank" aria-label="Telegram"
-					   class="p-2 rounded-md transition-colors hover:text-violet-400">
-						<i class="bi bi-telegram text-3xl"></i>
-					</a>
-				</div>
-			</div>
+			<!-- Panels -->
+			<div class="grid gap-0 lg:grid-cols-[1fr_1.2fr]">
 
-			<!-- Terminal -->
-			<div class="terminal border-t border-gray-800 bg-gray-950 px-6 py-4 text-xs">
-				<div class="flex items-center justify-between mb-3">
-					<span class="text-gray-500">~ test suite</span>
-					<div class="flex gap-1.5">
-						<span class="w-2 h-2 rounded-full bg-red-900 opacity-70"></span>
-						<span class="w-2 h-2 rounded-full bg-yellow-900 opacity-70"></span>
-						<span class="w-2 h-2 rounded-full bg-emerald-800 opacity-70"></span>
+				<!-- Left column: qafetch (top) + suite (bottom) -->
+				<div class="flex flex-col lg:border-r lg:border-gray-800">
+
+					<!-- Top-left: qafetch -->
+					<div class="terminal flex flex-col items-start gap-3 px-5 pt-5 pb-5 border-b border-gray-800">
+						<p class="text-[10px] text-gray-600">laureano@qa:~/tests$ qafetch</p>
+
+						<div class="relative mx-auto">
+							<div class="absolute -inset-1 rounded-full bg-gradient-to-r from-blue-500 via-violet-500 to-cyan-400 opacity-70 blur"></div>
+							<img src="https://avatars.githubusercontent.com/u/43646296" alt="Profile"
+								class="relative w-24 h-24 rounded-full bg-gray-500 aspect-square border border-gray-700">
+						</div>
+
+						<div class="text-xs w-full space-y-0.5">
+							<h1 class="text-cyan-300 font-semibold">laureano<span class="text-gray-600">@</span>qa</h1>
+							<p class="text-gray-700">───────────────────────</p>
+							<div class="flex gap-2">
+								<span class="text-blue-400 min-w-[4.5rem]">name</span>
+								<span class="text-gray-700">::</span>
+								<span class="text-gray-200">Gabriel O. Laureano</span>
+							</div>
+							<div class="flex gap-2">
+								<span class="text-blue-400 min-w-[4.5rem]">role</span>
+								<span class="text-gray-700">::</span>
+								<span class="text-gray-400" id="typing-text"></span>
+							</div>
+							<div class="flex gap-2">
+								<span class="text-blue-400 min-w-[4.5rem]">focus</span>
+								<span class="text-gray-700">::</span>
+								<span class="text-gray-400">software testing</span>
+							</div>
+							<div class="flex gap-2">
+								<span class="text-blue-400 min-w-[4.5rem]">edu</span>
+								<span class="text-gray-700">::</span>
+								<span class="text-gray-400">computer science</span>
+							</div>
+							<p class="text-gray-700">───────────────────────</p>
+							<div class="flex gap-2">
+								<span class="text-violet-400 min-w-[4.5rem]">github</span>
+								<span class="text-gray-700">::</span>
+								<a rel="noopener noreferrer" href="https://github.com/gabrioliv" target="_blank"
+								   class="text-gray-400 hover:text-cyan-300 transition-colors">GabriOliv</a>
+							</div>
+							<div class="flex gap-2">
+								<span class="text-violet-400 min-w-[4.5rem]">linkedin</span>
+								<span class="text-gray-700">::</span>
+								<a rel="noopener noreferrer" href="https://www.linkedin.com/in/gabriel-o-77569a208/" target="_blank"
+								   class="text-gray-400 hover:text-blue-300 transition-colors">gabriel-o</a>
+							</div>
+							<div class="flex gap-2">
+								<span class="text-violet-400 min-w-[4.5rem]">telegram</span>
+								<span class="text-gray-700">::</span>
+								<a rel="noopener noreferrer" href="https://t.me/Gab_Laureano" target="_blank"
+								   class="text-gray-400 hover:text-violet-300 transition-colors">@Gab_Laureano</a>
+							</div>
+						</div>
+					</div>
+
+					<!-- Bottom-left: run suite --profile -->
+					<div class="terminal flex flex-col px-4 py-3 text-xs bg-gray-950 min-h-[8rem]">
+						<div class="text-gray-500 mb-3 truncate">laureano@qa:~/tests$ <span id="suite-cmd"></span></div>
+						<div id="term-line-1" class="invisible flex justify-between py-0.5">
+							<span class="text-emerald-500"><i class="bi bi-check-lg"></i> computer_science</span>
+							<span id="term-badge-1" class="text-emerald-500 font-bold">&#10003;</span>
+						</div>
+						<div id="term-line-2" class="invisible flex justify-between py-0.5">
+							<span class="text-emerald-500"><i class="bi bi-check-lg"></i> software_testing</span>
+							<span id="term-badge-2" class="text-emerald-500 font-bold">&#10003;</span>
+						</div>
+						<div id="term-line-3" class="invisible flex justify-between py-0.5">
+							<span class="text-emerald-500"><i class="bi bi-check-lg"></i> quality_assurance</span>
+							<span id="term-badge-3" class="text-emerald-500 font-bold">&#10003;</span>
+						</div>
+						<div id="term-summary" class="invisible mt-2 pt-2 border-t border-gray-800 flex justify-between">
+							<span class="text-emerald-500">3 passed</span>
+							<span class="text-gray-700">0 failed</span>
+						</div>
+					</div>
+
+				</div>
+
+				<!-- Right: cat stack.toml -->
+				<div class="terminal flex flex-col p-4 gap-3 text-xs bg-gray-950 border-t border-gray-800 lg:border-t-0 overflow-y-auto">
+					<p class="text-gray-500">laureano@qa:~/tests$ <span id="stack-cmd"></span></p>
+					<div id="stack-s1" class="stack-section">
+						<p class="text-yellow-400/80 mb-1">[suite]</p>
+						<div class="space-y-1">
+							<p><span class="text-gray-400">computer_science</span>  <span class="text-gray-500">=</span> <span class="text-emerald-400">"passed"</span></p>
+							<p><span class="text-gray-400">software_testing</span>  <span class="text-gray-500">=</span> <span class="text-emerald-400">"passed"</span></p>
+							<p><span class="text-gray-400">quality_assurance</span> <span class="text-gray-500">=</span> <span class="text-emerald-400">"passed"</span></p>
+						</div>
+					</div>
+					<div id="stack-s2" class="stack-section">
+						<p class="text-yellow-400/80 mb-1">[tools]</p>
+						<div class="space-y-1">
+							<p><span class="text-gray-400">playwright</span> <span class="text-gray-500">=</span> <span class="text-blue-300">"e2e"</span></p>
+							<p><span class="text-gray-400">terraform</span>  <span class="text-gray-500">=</span> <span class="text-blue-300">"iac"</span></p>
+							<p><span class="text-gray-400">jenkins</span>    <span class="text-gray-500">=</span> <span class="text-blue-300">"ci/cd"</span></p>
+							<p><span class="text-gray-400">python</span>     <span class="text-gray-500">=</span> <span class="text-blue-300">"scripting"</span></p>
+							<p><span class="text-gray-400">typescript</span> <span class="text-gray-500">=</span> <span class="text-blue-300">"automation"</span></p>
+							<p><span class="text-gray-400">docker</span>     <span class="text-gray-500">=</span> <span class="text-blue-300">"containers"</span></p>
+							<p><span class="text-gray-400">git</span>        <span class="text-gray-500">=</span> <span class="text-blue-300">"vcs"</span></p>
+						</div>
+					</div>
+					<div id="stack-s3" class="stack-section">
+						<p class="text-yellow-400/80 mb-1">[skills]</p>
+						<div class="space-y-1">
+							<p><span class="text-gray-400">documentation</span>       <span class="text-gray-500">=</span> <span class="text-violet-300">"primary"</span></p>
+							<p><span class="text-gray-400">testing_process</span>     <span class="text-gray-500">=</span> <span class="text-violet-300">"primary"</span></p>
+							<p><span class="text-gray-400">automation_strategy</span> <span class="text-gray-500">=</span> <span class="text-violet-300">"primary"</span></p>
+							<p><span class="text-gray-400">quality_assurance</span>   <span class="text-gray-500">=</span> <span class="text-violet-300">"primary"</span></p>
+						</div>
+					</div>
+					<div id="stack-s4" class="stack-section">
+						<p class="text-yellow-400/80 mb-1">[certifications]</p>
+						<div class="space-y-1">
+							<p><span class="text-gray-400">ctfl</span>   <span class="text-gray-500">=</span> <span class="text-cyan-300">"foundation_level"</span></p>
+							<p><span class="text-gray-400">ctal</span>   <span class="text-gray-500">=</span> <span class="text-cyan-300">"advanced_level"</span></p>
+							<p><span class="text-gray-400">ct_tas</span> <span class="text-gray-500">=</span> <span class="text-cyan-300">"test_automation"</span></p>
+						</div>
 					</div>
 				</div>
-				<div id="term-line-1" class="invisible flex justify-between py-0.5">
-					<span class="text-emerald-500"><i class="bi bi-check-lg"></i> computer_science</span>
-					<span id="term-badge-1" class="text-emerald-500 font-bold">&#10003;</span>
-				</div>
-				<div id="term-line-2" class="invisible flex justify-between py-0.5">
-					<span class="text-emerald-500"><i class="bi bi-check-lg"></i> software_testing</span>
-					<span id="term-badge-2" class="text-emerald-500 font-bold">&#10003;</span>
-				</div>
-				<div id="term-line-3" class="invisible flex justify-between py-0.5">
-					<span class="text-emerald-500"><i class="bi bi-check-lg"></i> quality_assurance</span>
-					<span id="term-badge-3" class="text-emerald-500 font-bold">&#10003;</span>
-				</div>
-				<div id="term-summary" class="invisible mt-2 pt-2 border-t border-gray-800 flex justify-between">
-					<span class="text-emerald-500">3 passed</span>
-					<span class="text-gray-700">0 failed</span>
-				</div>
+
 			</div>
 
 		</div>
@@ -121,26 +263,68 @@
 		</div>
 	</section>
 
-	<div class="h-px max-w-3xl mx-auto bg-[linear-gradient(90deg,transparent,rgba(124,58,237,0.25),transparent)]"></div>
+	<div class="h-px max-w-3xl mx-auto bg-[linear-gradient(90deg,transparent,rgba(59,130,246,0.3),rgba(124,58,237,0.35),transparent)]"></div>
+
+	<!-- Certifications Section -->
+	<section id="certifications" class="max-w-3xl mx-auto px-4 py-16 scroll-mt-20">
+		<h3 class="border-l-2 border-cyan-500 pl-3 text-sm font-semibold text-gray-400 mb-8 tracking-widest uppercase">Certifications</h3>
+		<div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+			<div class="reveal-card card-glow terminal rounded-lg border border-gray-800 bg-gray-950 p-5 hover:border-cyan-600">
+				<div class="mb-4 flex items-center justify-between text-[10px] text-gray-600">
+					<span>cert/istqb</span>
+					<span class="text-emerald-400">VERIFIED</span>
+				</div>
+				<p class="text-2xl font-semibold text-cyan-300">CTFL</p>
+				<p class="mt-2 text-[11px] text-gray-500">foundation_level.cert</p>
+				<div class="mt-4 border-t border-gray-800 pt-3 text-[10px] text-emerald-400">
+					<span>status: active</span>
+				</div>
+			</div>
+			<div class="reveal-card card-glow terminal rounded-lg border border-gray-800 bg-gray-950 p-5 hover:border-violet-600">
+				<div class="mb-4 flex items-center justify-between text-[10px] text-gray-600">
+					<span>validation/istqb</span>
+					<span class="text-emerald-400">VERIFIED</span>
+				</div>
+				<p class="text-2xl font-semibold text-violet-300">CTAL</p>
+				<p class="mt-2 text-[11px] text-gray-500">advanced_level.validation</p>
+				<div class="mt-4 border-t border-gray-800 pt-3 text-[10px] text-emerald-400">
+					<span>status: active</span>
+				</div>
+			</div>
+			<div class="reveal-card card-glow terminal rounded-lg border border-gray-800 bg-gray-950 p-5 hover:border-blue-600">
+				<div class="mb-4 flex items-center justify-between text-[10px] text-gray-600">
+					<span>cert/istqb</span>
+					<span class="text-emerald-400">VERIFIED</span>
+				</div>
+				<p class="text-2xl font-semibold text-blue-300">CT-TAS</p>
+				<p class="mt-2 text-[11px] text-gray-500">test_automation.cert</p>
+				<div class="mt-4 border-t border-gray-800 pt-3 text-[10px] text-emerald-400">
+					<span>status: active</span>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<div class="h-px max-w-3xl mx-auto bg-[linear-gradient(90deg,transparent,rgba(59,130,246,0.3),rgba(124,58,237,0.35),transparent)]"></div>
 
 	<!-- Projects Section -->
-	<section class="max-w-3xl mx-auto px-4 py-16">
-		<h3 class="border-l-2 border-violet-500 pl-3 text-sm font-semibold text-gray-400 mb-8 tracking-widest uppercase">Projects</h3>
+	<section id="projects" class="max-w-3xl mx-auto px-4 py-16 scroll-mt-20">
+		<h3 class="border-l-2 border-blue-500 pl-3 text-sm font-semibold text-gray-400 mb-8 tracking-widest uppercase">Projects</h3>
 		<div class="grid grid-cols-1 sm:grid-cols-2 gap-4" id="projects-grid"></div>
 	</section>
 
-	<div class="h-px max-w-3xl mx-auto bg-[linear-gradient(90deg,transparent,rgba(124,58,237,0.25),transparent)]"></div>
+	<div class="h-px max-w-3xl mx-auto bg-[linear-gradient(90deg,transparent,rgba(59,130,246,0.3),rgba(124,58,237,0.35),transparent)]"></div>
 
 	<!-- Gists Section -->
-	<section class="max-w-3xl mx-auto px-4 py-16">
+	<section id="gists" class="max-w-3xl mx-auto px-4 py-16 scroll-mt-20">
 		<h3 class="border-l-2 border-violet-500 pl-3 text-sm font-semibold text-gray-400 mb-8 tracking-widest uppercase">Gists</h3>
 		<div class="flex flex-col gap-3" id="gists-list"></div>
 	</section>
 
 	<!-- Footer -->
-	<footer class="text-center text-xs text-gray-700 py-8">
+	<footer class="pb-24 pt-8 text-center text-xs text-gray-700 sm:py-8">
 		<a href="https://github.com/GabriOliv" target="_blank" rel="noopener noreferrer"
-		   class="hover:text-violet-500 transition-colors">
+		   class="hover:text-cyan-400 transition-colors">
 			GabriOliv @ GitHub
 		</a>
 	</footer>
@@ -187,8 +371,15 @@
 
 		// === Terminal animation ===
 		async function terminalAnimation() {
+			const cmdEl = document.getElementById('suite-cmd');
+			const cmd = 'run suite --profile';
+			await sleep(300);
+			for (let i = 0; i <= cmd.length; i++) {
+				cmdEl.textContent = cmd.slice(0, i);
+				await sleep(70);
+			}
+			await sleep(200);
 			const lines = ['term-line-1', 'term-line-2', 'term-line-3'];
-			await sleep(800);
 			for (let i = 0; i < lines.length; i++) {
 				document.getElementById(lines[i]).classList.remove('invisible');
 				await spinBadge('term-badge-' + (i + 1));
@@ -227,6 +418,7 @@
 				}
 			});
 		}, { threshold: 0.1 });
+		document.querySelectorAll('#certifications .reveal-card').forEach(el => observer.observe(el));
 
 		// === Render projects ===
 		function renderProjects(projects) {
@@ -234,13 +426,19 @@
 			grid.innerHTML = projects.map(p => {
 				const badge = p.stars
 					? '<span class="text-xs text-yellow-400 flex items-center gap-1"><i class="bi bi-star-fill"></i> ' + p.stars + '</span>'
-					: '<i class="bi bi-box-arrow-up-right text-xs text-gray-600"></i>';
-				return '<a href="' + p.url + '" target="_blank" rel="noopener noreferrer" class="reveal-card card-glow group bg-gray-900 rounded-lg p-5 border border-gray-800 hover:border-violet-700">'
-					+ '<div class="flex items-start justify-between mb-2">'
-					+ '<span class="text-sm font-semibold text-gray-200 group-hover:text-violet-400 transition-colors">' + p.name + '</span>'
+					: '<span class="terminal text-[10px] text-emerald-400">PASS</span>';
+				return '<a href="' + p.url + '" target="_blank" rel="noopener noreferrer" class="reveal-card project-card card-glow group bg-gray-950 rounded-lg p-5 border border-gray-800 hover:border-blue-600">'
+					+ '<div class="flex items-center justify-between mb-4 terminal text-[10px] text-gray-600">'
+					+ '<span>job/' + p.name + '</span>'
+					+ '<i class="bi bi-box-arrow-up-right"></i></div>'
+					+ '<div class="flex items-start justify-between mb-2 gap-3">'
+					+ '<span class="text-sm font-semibold text-gray-200 group-hover:text-cyan-300 transition-colors">' + p.name + '</span>'
 					+ badge + '</div>'
-					+ '<p class="text-xs text-gray-500 mb-3">' + p.description + '</p>'
+					+ '<p class="text-xs text-gray-500 mb-4">' + p.description + '</p>'
+					+ '<div class="flex flex-wrap items-center gap-2 border-t border-gray-800 pt-3">'
 					+ langBadge(p.language)
+					+ '<span class="terminal text-[10px] text-emerald-400 bg-emerald-950 px-2 py-0.5 rounded">status: passing</span>'
+					+ '</div>'
 					+ '</a>';
 			}).join('');
 			grid.querySelectorAll('.reveal-card').forEach(el => observer.observe(el));
@@ -253,9 +451,9 @@
 				const badge = g.stars
 					? '<span class="text-xs text-yellow-400 flex items-center gap-1 shrink-0"><i class="bi bi-star-fill"></i> ' + g.stars + '</span>'
 					: langBadge(g.language, 'shrink-0');
-				return '<a href="' + g.url + '" target="_blank" rel="noopener noreferrer" class="reveal-item card-glow group flex items-center justify-between bg-gray-900 rounded-lg px-4 py-3 border border-gray-800 hover:border-violet-700">'
+				return '<a href="' + g.url + '" target="_blank" rel="noopener noreferrer" class="reveal-item card-glow group flex items-center justify-between bg-gray-950 rounded-lg px-4 py-3 border border-gray-800 hover:border-violet-700">'
 					+ '<div class="min-w-0 mr-4">'
-					+ '<span class="text-sm text-gray-200 group-hover:text-violet-400 transition-colors">' + g.name + '</span>'
+					+ '<span class="text-sm text-gray-200 group-hover:text-violet-300 transition-colors">' + g.name + '</span>'
 					+ '<p class="text-xs text-gray-500 truncate">' + g.description + '</p>'
 					+ '</div>' + badge + '</a>';
 			}).join('');
@@ -270,11 +468,28 @@
 				renderGists(data.gists);
 			});
 
+		// === Stack TOML animation ===
+		async function stackAnimation() {
+			const cmdEl = document.getElementById('stack-cmd');
+			const cmd = 'cat stack.toml';
+			await sleep(400);
+			for (let i = 0; i <= cmd.length; i++) {
+				cmdEl.textContent = cmd.slice(0, i);
+				await sleep(75);
+			}
+			await sleep(150);
+			for (const id of ['stack-s1', 'stack-s2', 'stack-s3', 'stack-s4']) {
+				document.getElementById(id).classList.add('visible');
+				await sleep(220);
+			}
+		}
+
 		// === Init ===
 		terminalAnimation();
+		stackAnimation();
 		typingEffect(
 			document.getElementById('typing-text'),
-			['Computer Scientist', 'Software Tester', 'QA Engineer', 'Test Strategist'],
+			['computer scientist', 'software tester', 'qa engineer', 'test strategist'],
 			2400
 		);
 	</script>
