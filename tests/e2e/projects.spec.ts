@@ -55,7 +55,13 @@ test("PROJ-05 projects and gists as cards: two to a row from 560px, one below", 
       [390, 1],
     ] as const) {
       await page.setViewportSize({ width, height: 800 });
-      const [a, b] = [(await page.locator(sel).nth(0).boundingBox())!, (await page.locator(sel).nth(1).boundingBox())!];
+      // both boxes from one layout: a late web-font swap between two calls shifts the page under the second
+      const [a, b] = await page.locator(sel).evaluateAll((els) =>
+        els.slice(0, 2).map((el) => {
+          const { x, y, width, height } = el.getBoundingClientRect();
+          return { x, y, width, height };
+        }),
+      );
       if (perRow === 2) {
         expect(Math.round(a.y), `${sel} at ${width}`).toBe(Math.round(b.y));
         expect(b.x, `${sel} at ${width}`).toBeGreaterThan(a.x + a.width);
