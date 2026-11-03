@@ -1,0 +1,135 @@
+/* Dossier — generated from tokens.json */
+:root, [data-theme="paper"] {
+  --paper: #f4f4f1; /* Page ground. Every page starts here. */
+  --panel: #e6e6e1; /* Recessed fields: table header rows, sidebars, diagram plates. Never a card with a shadow. */
+  --ink: #0b0c0e; /* Primary text, rules and diagram strokes, on paper, panel and signal-tint. */
+  --ink-muted: #50535a; /* Field labels, footnotes, secondary readouts, on paper and panel. */
+  --rule: var(--ink); /* Structural rules: under headers, table heads, section breaks. Alias of ink. */
+  --rule-soft: #c6c7c1; /* Decorative only: background grid, row separators, inactive rings. Never the only cue for anything. */
+  --signal: #002fa7; /* The one accent (replaces the archetype's red): highlighted data, active nodes, the index square, primary marks. As text, on paper, panel and signal-tint. */
+  --signal-tint: #d7dff3; /* Quiet fill behind signal or ink text: highlighted table row, selected region of a diagram. */
+  --on-signal: #ffffff; /* Text and marks on a signal fill (solid Tag, filled node labels). */
+  --inverse: #0b0c0e; /* The header band and solid black blocks. Flips to light in Void and Blueprint. */
+  --on-inverse: #f4f4f1; /* Text on the inverse band (page title, file code). */
+  --contrast-error: #b42318; /* Errors and negative results only: failed checks, out-of-tolerance values, destructive actions. As text and marks on paper and panel (4.9:1 or more in every theme; not on signal-tint). Text on a contrast-error fill is on-signal. Always paired with a word ("Error", "Failed", "Out of range"), never colour alone. Not for downward trends. */
+  --focus-ring: 0 0 0 2px #f4f4f1, 0 0 0 4px #002fa7; /* Keyboard focus: a 2px ground-colour gap, then 2px of solid signal. Square, follows the box. */
+}
+[data-theme="void"] {
+  --paper: #0a0b0d;
+  --panel: #16181d;
+  --ink: #eeeeea;
+  --ink-muted: #9ea1a8;
+  --rule: var(--ink);
+  --rule-soft: #2c2f36;
+  --signal: #2b7fff;
+  --signal-tint: #101a3c;
+  --on-signal: #0a0b0d;
+  --inverse: #eeeeea;
+  --on-inverse: #0a0b0d;
+  --contrast-error: #ff6a55;
+  --focus-ring: 0 0 0 2px #0a0b0d, 0 0 0 4px #2b7fff;
+}
+[data-theme="blueprint"] {
+  --paper: #0f3270;
+  --panel: #163b80;
+  --ink: #f1f5ff;
+  --ink-muted: #b4c7ec;
+  --rule: var(--ink);
+  --rule-soft: #2f5aa3;
+  --signal: #7fdcff;
+  --signal-tint: #1d4a96;
+  --on-signal: #0f3270;
+  --inverse: #f1f5ff;
+  --on-inverse: #0f3270;
+  --contrast-error: #ff9282;
+  --focus-ring: 0 0 0 2px #0f3270, 0 0 0 4px #7fdcff;
+}
+:root {
+  --space-1: 4px; /* Label to value, tag padding (vertical). */
+  --space-2: 8px; /* Tag padding (horizontal), table cell padding (vertical). */
+  --space-3: 12px; /* Between a rule and the text it introduces. */
+  --space-4: 16px; /* Header band padding, table cell padding (horizontal). */
+  --space-6: 24px; /* Column gutter, gap between readouts. */
+  --space-8: 32px; /* Between sections on a page. */
+  --space-12: 48px; /* Page margin; height of the slim header band. */
+  --radius-none: 0; /* Bands, blocks, tags, tables, inputs: everything rectangular. */
+  --radius-node: 50%; /* Diagram nodes and dots only. */
+  --stroke-hair: 1px; /* Rings, leader lines, row separators, tag outlines. */
+  --stroke-rule: 2px; /* Rule under a header row or section title. */
+  --stroke-heavy: 6px; /* The index bar beside a section start; once per section. */
+  --font-display: "IBM Plex Sans Condensed", "Arial Narrow", sans-serif;
+  --font-sans: "IBM Plex Sans", "Helvetica Neue", Arial, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, Menlo, monospace;
+  --text-display: 700 64px/60px var(--font-display); /* Page title inside the inverse band. One per page, uppercase. */
+  --text-title: 700 32px/36px var(--font-display); /* Section titles, uppercase. */
+  --text-figure: 600 48px/48px var(--font-display); /* The big number in a Readout, Contents numbers, the value on a ProportionDial. Numerals only. */
+  --text-figure-xl: 600 120px/104px var(--font-display); /* Hero figure: Readout size hero. One per page or slide. Numerals and a short suffix only. */
+  --text-heading: 600 16px/20px var(--font-sans); /* Subheads and table captions, uppercase. */
+  --text-body: 400 14px/21px var(--font-sans); /* Running text in columns no wider than 64ch. */
+  --text-caption: 400 12px/16px var(--font-sans); /* Footnotes and figure captions, in ink-muted. */
+  --text-label: 500 11px/14px var(--font-mono); /* Field labels, file codes, tags, diagram callouts, table heads. Always uppercase. */
+  --text-datum: 400 13px/20px var(--font-mono); /* Numbers and codes in table cells, right-aligned, tabular. */
+}
+.display {
+  font-family: var(--font-display);
+  font-size: 64px;
+  line-height: 60px;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+}
+.title {
+  font-family: var(--font-display);
+  font-size: 32px;
+  line-height: 36px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+.figure {
+  font-family: var(--font-display);
+  font-size: 48px;
+  line-height: 48px;
+  font-weight: 600;
+  letter-spacing: 0;
+}
+.figure-xl {
+  font-family: var(--font-display);
+  font-size: 120px;
+  line-height: 104px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+.heading {
+  font-family: var(--font-sans);
+  font-size: 16px;
+  line-height: 20px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+}
+.body {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  line-height: 21px;
+  font-weight: 400;
+  letter-spacing: 0;
+}
+.caption {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  line-height: 16px;
+  font-weight: 400;
+  letter-spacing: 0;
+}
+.label {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  line-height: 14px;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+}
+.datum {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  line-height: 20px;
+  font-weight: 400;
+  letter-spacing: 0;
+}
