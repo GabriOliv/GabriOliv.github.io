@@ -1,0 +1,652 @@
+/* Page layout ported from the binding artifact (53zU…, lines 435-539): one phone column of modules under a
+   slim sticky tab bar; every colour, type and measure comes from Dossier's tokens. */
+[data-theme="void"],
+[data-theme="blueprint"] {
+  color-scheme: dark;
+}
+html {
+  -webkit-text-size-adjust: 100%;
+}
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font: var(--text-body);
+}
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0 0 auto;
+  height: env(safe-area-inset-top, 0px);
+  z-index: 10;
+  background: var(--paper);
+}
+* {
+  box-sizing: border-box;
+}
+button {
+  font: inherit;
+  color: inherit;
+}
+a {
+  color: inherit;
+}
+:focus-visible {
+  outline: none;
+  box-shadow: var(--focus-ring);
+}
+.pg-wrap {
+  max-width: 760px;
+  margin: 0 auto;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+.pg-cap {
+  font: var(--text-label);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+.pg-muted {
+  color: var(--ink-muted);
+}
+.pg-loading {
+  padding-block: var(--space-12);
+  color: var(--ink-muted);
+}
+
+/* tab bar */
+.pg-bar {
+  position: sticky;
+  top: env(safe-area-inset-top, 0px);
+  z-index: 5;
+  background: var(--paper);
+  border-bottom: var(--stroke-hair) solid var(--rule);
+}
+.pg-barrow {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+}
+.pg-tabs {
+  flex: 1 1 auto;
+  min-width: 0;
+  display: flex;
+  justify-content: space-between;
+  gap: var(--space-3);
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.pg-tabs::-webkit-scrollbar {
+  display: none;
+}
+.pg-tabs a {
+  flex: none;
+  display: flex;
+  align-items: center;
+  min-height: 44px;
+  color: var(--ink-muted);
+  text-decoration: none;
+  border-bottom: var(--stroke-rule) solid transparent;
+}
+.pg-tabs a[aria-current="true"] {
+  color: var(--signal);
+  border-bottom-color: var(--signal);
+}
+@media (hover: hover) {
+  .pg-tabs a:hover {
+    color: var(--ink);
+  }
+}
+.pg-themes {
+  flex: none;
+  display: flex;
+  gap: 2px;
+}
+.pg-themes button {
+  display: grid;
+  place-items: center;
+  width: 28px;
+  min-height: 44px;
+  padding: 0;
+  border: 0;
+  border-bottom: var(--stroke-rule) solid transparent;
+  background: transparent;
+  cursor: pointer;
+}
+.pg-themes button[aria-pressed="true"] {
+  border-bottom-color: var(--signal);
+}
+.pg-swatch {
+  width: 16px;
+  height: 16px;
+  border: var(--stroke-hair) solid var(--ink);
+  background: linear-gradient(135deg, var(--paper) 50%, var(--signal) 50%);
+}
+.pg-progress {
+  height: var(--stroke-rule);
+  margin-bottom: calc(var(--stroke-rule) * -1);
+  background: var(--ink);
+  transform: scaleX(0);
+  transform-origin: left;
+}
+
+/* page */
+.pg-main {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--space-12);
+  padding-block: var(--space-4) var(--space-12);
+}
+.pg-main > * {
+  min-width: 0;
+}
+.pg-block {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--space-4);
+  min-width: 0;
+  scroll-margin-top: calc(60px + env(safe-area-inset-top, 0px));
+}
+.pg-note {
+  margin: 0;
+  font: var(--text-caption);
+  color: var(--ink-muted);
+  max-width: 64ch;
+}
+
+/* Dossier components at phone width */
+.ds-header-band {
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-4);
+}
+.ds-header-title {
+  font-size: clamp(48px, 16vw, 96px);
+  line-height: 0.92;
+  text-wrap: balance;
+}
+.ds-header-code {
+  white-space: normal;
+  padding-bottom: 0;
+}
+.ds-section-row {
+  flex-wrap: wrap;
+  gap: var(--space-1) var(--space-6);
+}
+.ds-section-title {
+  flex: 1 1 auto;
+  min-width: 0;
+  text-wrap: balance;
+}
+.ds-section-meta {
+  white-space: normal;
+}
+.ds-schematic {
+  margin-inline: auto;
+}
+.ds-sch-text {
+  letter-spacing: 0.04em;
+}
+
+/* subject: header band, then the qafetch panel (suite across the top, profile and stack tables below) */
+.pg-file {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--space-6);
+}
+.pg-fetch {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  border: var(--stroke-hair) solid var(--ink);
+  font-family: var(--font-mono);
+  font-size: 13px;
+  line-height: 20px;
+}
+@media (min-width: 640px) {
+  .pg-fetch {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+.pg-pane {
+  display: grid;
+  align-content: start;
+  gap: var(--space-1);
+  padding: var(--space-4);
+  min-width: 0;
+}
+.pg-pane-run {
+  grid-column: 1 / -1;
+  background: var(--panel);
+  border-bottom: var(--stroke-hair) solid var(--ink);
+}
+.pg-pane-tables {
+  gap: var(--space-4);
+  border-top: var(--stroke-hair) solid var(--ink);
+}
+@media (min-width: 640px) {
+  .pg-pane-tables {
+    border-top: 0;
+    border-left: var(--stroke-hair) solid var(--ink);
+  }
+}
+.pg-fetch hr {
+  width: 100%;
+  margin: var(--space-1) 0;
+  border: 0;
+  border-top: var(--stroke-hair) solid var(--rule-soft);
+}
+.pg-prompt {
+  font-size: 11px;
+  color: var(--ink-muted);
+  overflow-wrap: anywhere;
+}
+.pg-host b,
+.pg-k {
+  color: var(--signal);
+}
+.pg-host b {
+  font-weight: 500;
+}
+.pg-contact {
+  gap: var(--space-3);
+}
+.pg-kv {
+  display: grid;
+  grid-template-columns: 9ch 2ch minmax(0, 1fr);
+}
+.pg-v {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+.pg-ext {
+  display: inline-flex;
+  align-items: center;
+  min-height: 20px;
+  text-decoration: underline;
+  text-decoration-color: var(--signal);
+  text-underline-offset: 3px;
+}
+.pg-sr {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+/* block flex, not inline: an empty or fallback-font line must not move the baseline (layout stays still) */
+.pg-typer {
+  display: flex;
+  align-items: center;
+  min-height: 20px;
+}
+.pg-hl {
+  color: var(--signal);
+  font-weight: 500;
+}
+.pg-caret {
+  display: inline-block;
+  width: 0.6ch;
+  height: 1.1em;
+  margin-left: 1px;
+  background: var(--signal);
+  animation: pg-blink 1s steps(1) infinite;
+}
+@keyframes pg-blink {
+  50% {
+    opacity: 0;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .pg-caret {
+    animation: none;
+  }
+}
+
+/* stack tables */
+.pg-mini-wrap {
+  display: grid;
+  gap: var(--space-1);
+  min-width: 0;
+}
+.pg-mini-cap {
+  margin: 0;
+  color: var(--ink-muted);
+}
+.pg-mini {
+  width: 100%;
+  border-collapse: collapse;
+}
+.pg-mini th,
+.pg-mini td {
+  text-align: left;
+  vertical-align: top;
+  padding: 5px var(--space-2);
+  border-bottom: var(--stroke-hair) solid var(--rule-soft);
+  overflow-wrap: anywhere;
+}
+.pg-mini thead th {
+  background: var(--panel);
+  font-weight: 500;
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  border-bottom: var(--stroke-hair) solid var(--ink);
+}
+.pg-mini tbody th {
+  width: 1%;
+  white-space: nowrap;
+  font-weight: 500;
+  color: var(--signal);
+}
+.pg-mini tr.pg-on > * {
+  background: var(--signal-tint);
+}
+
+/* test suite */
+.pg-suite {
+  display: grid;
+  gap: var(--space-1);
+}
+.pg-suite-head {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--space-3);
+  color: var(--ink-muted);
+}
+.pg-suite-head b {
+  color: var(--ink);
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+}
+.pg-meter {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: minmax(0, 1fr);
+  gap: 3px;
+  height: 10px;
+  margin-block: var(--space-1) var(--space-2);
+}
+.pg-meter span {
+  position: relative;
+  overflow: hidden;
+  border: var(--stroke-hair) solid var(--ink);
+}
+.pg-meter i {
+  position: absolute;
+  inset: 0;
+  background: var(--signal);
+  transform-origin: left;
+  transition: transform 70ms linear;
+}
+@media (prefers-reduced-motion: reduce) {
+  .pg-meter i {
+    transition: none;
+  }
+}
+.pg-checks {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+}
+.pg-checks li {
+  display: grid;
+  grid-template-columns: 2ch minmax(0, 1fr) auto;
+  gap: var(--space-2);
+  align-items: center;
+}
+/* the spinner glyphs come from a fallback font: a fixed box keeps the row height still while it turns */
+.pg-checks li > :first-child {
+  display: block;
+  height: 20px;
+  line-height: 20px;
+  overflow: hidden;
+}
+.pg-check-name {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+.pg-check-state {
+  color: var(--ink-muted);
+}
+.pg-check-pass > :first-child,
+.pg-check-pass .pg-check-state {
+  color: var(--signal);
+}
+.pg-check-wait .pg-check-name {
+  color: var(--ink-muted);
+}
+.pg-suite-foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  flex-wrap: wrap;
+  margin-top: var(--space-2);
+  padding-top: var(--space-2);
+  border-top: var(--stroke-hair) solid var(--rule-soft);
+}
+.pg-btn {
+  min-height: 44px;
+  padding: 0 var(--space-4);
+  border: var(--stroke-hair) solid var(--ink);
+  background: transparent;
+  cursor: pointer;
+}
+.pg-btn:disabled {
+  border-style: dashed;
+  border-color: var(--ink-muted);
+  color: var(--ink-muted);
+  cursor: default;
+}
+@media (hover: hover) {
+  .pg-btn:not(:disabled):hover {
+    background: var(--signal);
+    border-color: var(--signal);
+    color: var(--on-signal);
+  }
+}
+
+/* certifications: Dossier's Hierarchy turned sideways, root to the left; connectors redrawn for rows */
+.pg-treewrap {
+  padding-block: var(--space-2);
+}
+.pg-side.ds-tree ul {
+  flex-direction: column;
+  justify-content: center;
+  padding: 0 0 0 var(--space-6);
+}
+.pg-side.ds-tree > ul {
+  padding-left: 0;
+}
+.pg-side.ds-tree li {
+  flex-direction: row;
+  align-items: center;
+  padding: var(--space-1) 0 var(--space-1) var(--space-6);
+}
+.pg-side.ds-tree > ul > li {
+  padding-left: 0;
+}
+.pg-side.ds-tree li::before,
+.pg-side.ds-tree li::after {
+  display: block;
+  left: 0;
+  right: auto;
+  width: var(--space-6);
+  height: 50%;
+  border-top: 0;
+  border-left: var(--stroke-hair) solid var(--rule);
+}
+.pg-side.ds-tree li::before {
+  top: 0;
+  border-bottom: var(--stroke-hair) solid var(--rule);
+}
+.pg-side.ds-tree li::after {
+  top: 50%;
+}
+.pg-side.ds-tree li:first-child::before,
+.pg-side.ds-tree li:last-child::after {
+  border-left: 0;
+}
+.pg-side.ds-tree li:only-child::before {
+  display: block;
+}
+.pg-side.ds-tree > ul > li::before,
+.pg-side.ds-tree > ul > li:only-child::before,
+.pg-side.ds-tree > ul > li::after {
+  display: none;
+}
+.pg-side.ds-tree ul ul::before {
+  top: 50%;
+  left: 0;
+  width: var(--space-6);
+  height: 0;
+  border-left: 0;
+  border-top: var(--stroke-hair) solid var(--rule);
+}
+.pg-side .ds-tree-node {
+  text-align: left;
+}
+/* the root is the entry level: drawn plain so the top certifications carry the emphasis */
+.pg-side .ds-tree-root:not(.ds-tree-on) {
+  background: var(--paper);
+  border-color: var(--ink);
+  color: var(--ink);
+}
+.pg-side .ds-tree-root:not(.ds-tree-on) .ds-tree-code {
+  color: var(--ink-muted);
+}
+.pg-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+/* projects and gists: cards, two to a row from 560px */
+.pg-entries {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--space-4);
+}
+@media (min-width: 560px) {
+  .pg-entries {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+.pg-entries li {
+  display: grid;
+  min-width: 0;
+}
+.pg-entry,
+.pg-gist {
+  border: var(--stroke-hair) solid var(--ink);
+  padding: var(--space-4);
+}
+@media (hover: hover) {
+  .pg-entry:hover,
+  .pg-gist:hover {
+    border-color: var(--signal);
+  }
+}
+.pg-entry {
+  display: grid;
+  align-content: start;
+  gap: var(--space-2);
+  color: var(--ink);
+  text-decoration: none;
+}
+.pg-entry-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+}
+.pg-entry-name {
+  margin: 0;
+  min-width: 0;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 22px;
+  line-height: 26px;
+  letter-spacing: 0.01em;
+  text-transform: uppercase;
+  overflow-wrap: anywhere;
+}
+.pg-entry svg {
+  flex: none;
+  fill: var(--signal);
+}
+.pg-entry-desc {
+  margin: 0;
+  max-width: 64ch;
+  overflow-wrap: anywhere;
+}
+.pg-entry-url {
+  margin-top: auto;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  line-height: 16px;
+  color: var(--ink-muted);
+  overflow-wrap: anywhere;
+}
+@media (hover: hover) {
+  .pg-entry:hover .pg-entry-name,
+  .pg-gist:hover .pg-gist-name,
+  .pg-ext:hover {
+    text-decoration: underline;
+    text-decoration-color: var(--signal);
+    text-underline-offset: 4px;
+    text-decoration-thickness: 2px;
+  }
+}
+
+/* stack */
+.pg-fig {
+  display: grid;
+  gap: var(--space-2);
+  margin: 0;
+  min-width: 0;
+}
+.pg-fig-box {
+  overflow-x: auto;
+}
+
+/* gists */
+.pg-gist {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-content: start;
+  gap: var(--space-2) var(--space-3);
+  align-items: start;
+  min-height: 44px;
+  color: var(--ink);
+  text-decoration: none;
+}
+.pg-gist-name {
+  font: var(--text-datum);
+  font-weight: 500;
+  overflow-wrap: anywhere;
+}
+.pg-gist-desc {
+  grid-column: 1 / -1;
+  font: var(--text-caption);
+  color: var(--ink-muted);
+  overflow-wrap: anywhere;
+}
+
+/* end of file */
+.pg-end {
+  display: grid;
+  gap: var(--space-4);
+}
+.pg-eof {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding-top: var(--space-3);
+  border-top: var(--stroke-rule) solid var(--rule);
+  color: var(--ink-muted);
+}
